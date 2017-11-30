@@ -19,4 +19,22 @@ public class LisServer {
     public void setPort(int port) {
         this.port = port;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LisServer lisServer = (LisServer) o;
+
+        if (port != lisServer.port) return false;
+        return ip != null ? ip.equals(lisServer.ip) : lisServer.ip == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ip != null ? ip.hashCode() : 0;
+        result = 31 * result + port;
+        return result;
+    }
 }

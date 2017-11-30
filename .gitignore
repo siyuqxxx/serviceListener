@@ -1,0 +1,9 @@
+# 忽略 idea 工程配置文件
+.idea/
+*.iml
+
+# 忽略 maven 输出文件
+target/
+
+# 忽略 release.properties maven 版本管理配置文件，该文件可以自动生成无需跟踪
+release.properties

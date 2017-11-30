@@ -1,8 +1,10 @@
 package com.zt.serviceListener.pojo;
 
 public class LisServer {
-    private String ip;
-    private int port;
+    private String ip = "";
+    private int port = 0;
+    private String userName = "";
+    private String password = "";
 
     public String getIp() {
         return ip;
@@ -18,6 +20,22 @@ public class LisServer {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

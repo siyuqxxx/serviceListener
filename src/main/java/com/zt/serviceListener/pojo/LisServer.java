@@ -46,13 +46,27 @@ public class LisServer {
         LisServer lisServer = (LisServer) o;
 
         if (port != lisServer.port) return false;
-        return ip != null ? ip.equals(lisServer.ip) : lisServer.ip == null;
+        if (ip != null ? !ip.equals(lisServer.ip) : lisServer.ip != null) return false;
+        if (userName != null ? !userName.equals(lisServer.userName) : lisServer.userName != null) return false;
+        return password != null ? password.equals(lisServer.password) : lisServer.password == null;
     }
 
     @Override
     public int hashCode() {
         int result = ip != null ? ip.hashCode() : 0;
         result = 31 * result + port;
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "LisServer{" +
+                "ip='" + ip + '\'' +
+                ", port=" + port +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

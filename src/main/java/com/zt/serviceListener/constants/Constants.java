@@ -5,6 +5,8 @@ import java.io.File;
 public final class Constants {
     public static final String CONF_DIR = System.getProperty("user.dir") + File.separator + "conf" + File.separator;
 
+    public static final String HTTP_HEAD = "http:/";
+
     public static class PropertiesFile {
         public static final String LOG4J = CONF_DIR + "log4j.properties";
     }

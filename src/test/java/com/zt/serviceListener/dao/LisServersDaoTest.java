@@ -12,7 +12,7 @@ public class LisServersDaoTest {
     public void LisServersDao() throws Exception {
         LisServersBean set = new LisServersBean();
         LisServer e = new LisServer();
-        e.setIp("12345678" );
+        e.setIp("123456234712" ); // 检查不能被解析的 host
         e.setPort(8081);
         e.setUserName("root");
         e.setPassword("Test1234_");
@@ -40,9 +40,13 @@ public class LisServersDaoTest {
 
         System.out.println(read);
 
-        assertEquals(set.getLisServers().size(), read.getLisServers().size());
+        assertEquals(set.getLisServers().size() - 1, read.getLisServers().size());
 
-        assertTrue(set.getLisServers().containsAll(read.getLisServers()));
+        for (LisServer s : read.getLisServers()) {
+            assertTrue(set.getLisServers().contains(s));
+        }
+
+        System.out.println(read.toHttpUrlSet());
     }
 
 }

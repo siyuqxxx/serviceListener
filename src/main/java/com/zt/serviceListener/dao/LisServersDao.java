@@ -8,7 +8,7 @@ public class LisServersDao {
     public LisServersBean read(String path) {
         LisServers set = JSONUtil.jsonFile2Obj(path, LisServers.class);
 
-        return new LisServersBean().addAll(set);
+        return new LisServersBean().addResolved(set);
     }
 
     public void write(String path, LisServersBean set) {

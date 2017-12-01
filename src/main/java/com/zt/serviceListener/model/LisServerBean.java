@@ -11,6 +11,8 @@ public class LisServerBean extends LisServer{
     public LisServerBean(LisServer lisServer) {
         super.setIp(lisServer.getIp());
         super.setPort(lisServer.getPort());
+        super.setUserName(lisServer.getUserName());
+        super.setPassword(lisServer.getPassword());
     }
 
     /**

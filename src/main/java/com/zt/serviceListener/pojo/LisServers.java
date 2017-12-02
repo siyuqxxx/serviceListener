@@ -6,7 +6,7 @@ import java.util.Set;
 public class LisServers {
     private Set<LisServer> lisServers = new HashSet<>();
 
-    public Set<LisServer> getLisServers() {
+    public Set<LisServer>  getLisServers() {
         return lisServers;
     }
 

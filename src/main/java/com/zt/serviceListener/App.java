@@ -28,7 +28,7 @@ public class App
 //        LOG.info("test");
 
 //        InetSocketAddress address = new InetSocketAddress("42.247.27.226", 8081);
-        InetSocketAddress address = new InetSocketAddress("0.2.3.4", 8081);
+        InetSocketAddress address = new InetSocketAddress("1234562347", 8081);
         boolean unresolved = address.isUnresolved();
 
         final Socket socket = new Socket();

@@ -2,20 +2,20 @@ package com.zt.serviceListener.pojo;
 
 import java.util.Arrays;
 
-public class UrlRouting {
-    private String[] urls = new String[]{};
+public class LisInterfaceUrls {
+    private LisInterfaceUrl[] urls = new LisInterfaceUrl[]{};
 
-    public String[] getUrls() {
+    public LisInterfaceUrl[] getUrls() {
         return urls;
     }
 
-    public void setUrls(String[] urls) {
+    public void setUrls(LisInterfaceUrl[] urls) {
         this.urls = urls;
     }
 
     @Override
     public String toString() {
-        return "UrlRouting{" +
+        return "LisInterfaceUrls{" +
                 "urls=" + Arrays.toString(urls) +
                 '}';
     }

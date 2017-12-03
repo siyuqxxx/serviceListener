@@ -10,10 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LisServersDaoTest {
     @Test
     public void LisServersDao() throws Exception {
+
+        // set up
         LisServer e = new LisServer();
         e.setIp("123456234712" ); // 检查不能被解析的 host
         e.setPort(8081);
@@ -28,8 +31,7 @@ public class LisServersDaoTest {
         e2.setIp("42.247.27.226");
         e2.setPort(8081);
 
-        Set<LisServer> lisServers = new HashSet<LisServer>();
-
+        Set<LisServer> lisServers = new HashSet<>();
         lisServers.add(e);
         lisServers.add(e1);
         lisServers.add(e2);
@@ -37,14 +39,11 @@ public class LisServersDaoTest {
         LisServers set = new LisServers();
         set.setLisServers(lisServers);
 
-        String dir = System.getProperty("user.dir");
-        String path = dir + "\\src\\resource_test\\lis_server.json";
-        System.out.println(path);
-
+        LisServersBean bean = new LisServersBean().addAll(set);
+        String path = System.getProperty("user.dir") + "\\src\\resource_test\\lis_server.json";
         LisServersDao dao = new LisServersDao();
 
-        LisServersBean bean = new LisServersBean();
-        bean.addAll(set).getResolved();
+        // test
         dao.write(path, bean);
 
         LisServersBean read = dao.read(path);
@@ -53,9 +52,9 @@ public class LisServersDaoTest {
 
         assertEquals(bean.toPojo().getLisServers().size() - 1, read.toPojo().getLisServers().size());
 
-//        for (LisServer s : read.getLisServers()) {
-//            assertTrue(bean.getLisServers().contains(s));
-//        }
+        for (LisServer s : read.toPojo().getLisServers()) {
+            assertTrue(bean.toPojo().getLisServers().contains(s));
+        }
 
         System.out.println(read.toHttpUrlSet());
     }

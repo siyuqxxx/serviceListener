@@ -36,4 +36,11 @@ public class LisServerBean {
     public InetSocketAddress getSocketAddress() {
         return new InetSocketAddress(lisServer.getIp(), lisServer.getPort());
     }
+
+    @Override
+    public String toString() {
+        return "LisServerBean{" +
+                "lisServer=" + lisServer +
+                '}';
+    }
 }

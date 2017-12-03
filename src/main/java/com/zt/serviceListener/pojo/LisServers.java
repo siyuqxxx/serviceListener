@@ -6,12 +6,12 @@ import java.util.Set;
 public class LisServers {
     private Set<LisServer> lisServers = new HashSet<>();
 
-    public Set<LisServer>  getLisServers() {
+    public Set<LisServer> getLisServers() {
         return lisServers;
     }
 
     public void setLisServers(Set<LisServer> lisServers) {
-        this.lisServers = lisServers;
+        this.lisServers.addAll(lisServers);
     }
 
     @Override

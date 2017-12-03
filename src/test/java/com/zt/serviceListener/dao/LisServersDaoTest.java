@@ -29,6 +29,7 @@ public class LisServersDaoTest {
         LisServer e2 = new LisServer();
         e2.setIp("42.247.27.226");
         e2.setPort(8081);
+        e2.setDescription("重庆第二师范学院");
 
         Set<LisServer> lisServers = new HashSet<>();
         lisServers.add(e);

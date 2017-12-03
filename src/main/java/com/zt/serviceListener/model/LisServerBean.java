@@ -31,7 +31,7 @@ public class LisServerBean implements IBean<LisServer, LisServerBean> {
 
     @Override
     public LisServerBean addAll(LisServer e) {
-        this.lisServer = Optional.ofNullable(lisServer).orElse(new LisServer());
+        this.lisServer = Optional.ofNullable(e).orElse(new LisServer());
         return this;
     }
 

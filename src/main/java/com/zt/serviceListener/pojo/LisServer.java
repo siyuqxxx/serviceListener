@@ -1,10 +1,19 @@
 package com.zt.serviceListener.pojo;
 
 public class LisServer {
+    private String description = "";
     private String ip = "";
     private int port = 0;
     private String userName = "";
     private String password = "";
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getIp() {
         return ip;
@@ -63,7 +72,8 @@ public class LisServer {
     @Override
     public String toString() {
         return "LisServer{" +
-                "ip='" + ip + '\'' +
+                "description='" + description + '\'' +
+                ", ip='" + ip + '\'' +
                 ", port=" + port +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +

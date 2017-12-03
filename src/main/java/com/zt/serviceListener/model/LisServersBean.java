@@ -40,7 +40,7 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
     @Override
     public LisServers toPojo() {
         LisServers lisServers = new LisServers();
-        lisServers.setLisServers(servers.stream().map(LisServerBean::getLisServer).collect(Collectors.toSet()));
+        lisServers.setLisServers(servers.stream().map(LisServerBean::toPojo).collect(Collectors.toSet()));
         return lisServers;
     }
 

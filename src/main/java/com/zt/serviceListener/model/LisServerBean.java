@@ -5,23 +5,15 @@ import com.zt.serviceListener.pojo.LisServer;
 import java.net.InetSocketAddress;
 import java.util.Optional;
 
-public class LisServerBean {
+public class LisServerBean implements IBean<LisServer, LisServerBean> {
 
     private LisServer lisServer = new LisServer();
 
-    public LisServerBean(){}
-
-    public LisServerBean(LisServer lisServer)
-    {
-        setLisServer(lisServer);
+    public LisServerBean() {
     }
 
-    public LisServer getLisServer() {
-        return lisServer;
-    }
-
-    public void setLisServer(LisServer lisServer) {
-        this.lisServer = Optional.ofNullable(lisServer).orElse(new LisServer());
+    public LisServerBean(LisServer lisServer) {
+        addAll(lisServer);
     }
 
     /**
@@ -35,6 +27,22 @@ public class LisServerBean {
 
     public InetSocketAddress getSocketAddress() {
         return new InetSocketAddress(lisServer.getIp(), lisServer.getPort());
+    }
+
+    @Override
+    public LisServerBean addAll(LisServer e) {
+        this.lisServer = Optional.ofNullable(lisServer).orElse(new LisServer());
+        return this;
+    }
+
+    @Override
+    public LisServer toPojo() {
+        return this.lisServer;
+    }
+
+    @Override
+    public void clean() {
+        lisServer = new LisServer();
     }
 
     @Override

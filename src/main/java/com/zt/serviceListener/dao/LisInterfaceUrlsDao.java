@@ -14,6 +14,6 @@ public class LisInterfaceUrlsDao implements IDao<LisInterfaceUrlsBean> {
 
     @Override
     public void write(String path, LisInterfaceUrlsBean obj) {
-        JSONUtil.obj2JsonFile(path, obj);
+        JSONUtil.obj2JsonFile(path, obj.toPojo());
     }
 }

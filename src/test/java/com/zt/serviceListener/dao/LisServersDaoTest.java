@@ -5,7 +5,6 @@ import com.zt.serviceListener.pojo.LisServer;
 import com.zt.serviceListener.pojo.LisServers;
 import org.junit.Test;
 
-import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,12 +57,4 @@ public class LisServersDaoTest {
 
         System.out.println(read.toHttpUrlSet());
     }
-
-    @Test
-    public void temp() throws Exception {
-        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-        int i = random.nextInt(100);
-        System.out.print(i);
-    }
-
 }

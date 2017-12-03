@@ -5,17 +5,16 @@ import java.util.Objects;
 
 public class ArraysUtil {
     public static <T> T[] concat(T[] first, T[] second) {
-        if (Objects.isNull(first) && Objects.isNull(second))
-        {
+        if (Objects.isNull(first) && Objects.isNull(second)) {
             return null;
         }
 
-        if (Objects.nonNull(first) && Objects.isNull(second)) {
-            return first;
+        if (isInvalid(first)) {
+            return second;
         }
 
-        if (Objects.isNull(first) && Objects.nonNull(second)) {
-            return second;
+        if (isInvalid(second)) {
+            return first;
         }
 
         T[] result = Arrays.copyOf(first, first.length + second.length);
@@ -23,8 +22,11 @@ public class ArraysUtil {
         return result;
     }
 
-    public static <T> boolean isEmpty(T[] arr)
-    {
+    public static <T> boolean isInvalid(T[] arr) {
+        return Objects.isNull(arr) || isEmpty(arr);
+    }
+
+    public static <T> boolean isEmpty(T[] arr) {
         return arr.length == 0;
     }
 }

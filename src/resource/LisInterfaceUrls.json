@@ -1,1 +1,1 @@
-{"empty":true,"randomUrlRouting":{"description":"","lisInterfaceUrl":""},"urls":[{"description":"find book by title","lisInterfaceUrl":"/datasnap/rest/TInterFace/searchbook/title/java "},{"description":"get new books","lisInterfaceUrl":"/datasnap/rest/TInterFace/newbooks/1"}]}
+{"urls":[{"description":"find book by title","lisInterfaceUrl":"/datasnap/rest/TInterFace/searchbook/title/java "},{"description":"get new books","lisInterfaceUrl":"/datasnap/rest/TInterFace/newbooks/1"}]}

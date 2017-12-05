@@ -7,6 +7,8 @@ public final class Constants {
 
     public static final String HTTP_HEAD = "http:/";
 
+    public static final int MAX_URL_RESPONSE_LENGTH = 65535;
+
     public static class PropertiesFile {
         public static final String LOG4J = CONF_DIR + "log4j.properties";
     }

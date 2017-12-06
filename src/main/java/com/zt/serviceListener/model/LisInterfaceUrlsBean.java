@@ -5,19 +5,40 @@ import com.zt.serviceListener.pojo.LisInterfaceUrls;
 import com.zt.serviceListener.util.ArraysUtil;
 import com.zt.serviceListener.util.RandomUtil;
 
+import java.util.Arrays;
 import java.util.Objects;
 
-public class LisInterfaceUrlsBean {
+public class LisInterfaceUrlsBean implements IBean<LisInterfaceUrls, LisInterfaceUrlsBean> {
     private LisInterfaceUrls lisInterfaceUrls = new LisInterfaceUrls();
 
+    @Override
     public LisInterfaceUrlsBean addAll(LisInterfaceUrls urls) {
         if (Objects.nonNull(urls)) {
-            LisInterfaceUrl[] concatUrls = ArraysUtil.concat(lisInterfaceUrls.getUrls(), urls.getUrls());
+            addAll(urls.getUrls());
+        }
+        return this;
+    }
+
+    public LisInterfaceUrlsBean addAll(LisInterfaceUrl[] urls) {
+        if (Objects.nonNull(urls)) {
+            LisInterfaceUrl[] concatUrls = ArraysUtil.concat(lisInterfaceUrls.getUrls(), urls);
             if (!ArraysUtil.isInvalid(concatUrls)) {
-                lisInterfaceUrls.setUrls(concatUrls);
+                LisInterfaceUrl[] arr = Arrays.stream(concatUrls)
+                        .filter(LisInterfaceUrl::isEnable).toArray(LisInterfaceUrl[]::new);
+                lisInterfaceUrls.setUrls(arr);
             }
         }
         return this;
+    }
+
+    public LisInterfaceUrlsBean filterDisable() {
+        LisInterfaceUrlsBean b = new LisInterfaceUrlsBean();
+        if (!isEmpty()) {
+            LisInterfaceUrl[] arr = Arrays.stream(lisInterfaceUrls.getUrls())
+                    .filter(LisInterfaceUrl::isEnable).toArray(LisInterfaceUrl[]::new);
+            b.addAll(arr);
+        }
+        return b;
     }
 
     public LisInterfaceUrlBean getRandomUrlInterface() {
@@ -39,8 +60,14 @@ public class LisInterfaceUrlsBean {
         return size() <= 0;
     }
 
+    @Override
     public LisInterfaceUrls toPojo() {
         return lisInterfaceUrls;
+    }
+
+    @Override
+    public void clean() {
+        this.lisInterfaceUrls = new LisInterfaceUrls();
     }
 
     @Override

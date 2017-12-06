@@ -3,6 +3,7 @@ package com.zt.serviceListener.pojo;
 public class LisInterfaceUrl {
     private String description = "";
     private String LisInterfaceUrl = "";
+    private boolean isEnable = true;
 
     public String getDescription() {
         return description;
@@ -18,6 +19,14 @@ public class LisInterfaceUrl {
 
     public void setLisInterfaceUrl(String lisInterfaceUrl) {
         this.LisInterfaceUrl = lisInterfaceUrl;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     @Override

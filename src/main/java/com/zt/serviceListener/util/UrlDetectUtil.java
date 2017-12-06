@@ -21,12 +21,12 @@ public class UrlDetectUtil {
     }
 
     public static String callUrl(URL url) {
+        LOG.info("call url: " + url);
         if (Objects.nonNull(url)) {
             try {
                 return callUrlImpl(url);
             } catch (IOException e) {
                 LOG.error("call url error.", e);
-                e.printStackTrace();
                 return "call url error.";
             }
         }

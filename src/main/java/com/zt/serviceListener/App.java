@@ -1,70 +1,28 @@
 package com.zt.serviceListener;
 
+import com.zt.serviceListener.constants.Constants;
+import com.zt.serviceListener.controller.UrlController;
+import com.zt.serviceListener.util.UrlDetectUtil;
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.util.Set;
 
-public class App
-{
+public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
+
     public static void main(String[] args) throws IOException {
+        PropertyConfigurator.configure(Constants.PropertiesFile.LOG4J);
 
-//        PropertyConfigurator.configure(Constants.PropertiesFile.LOG4J);
-//
-//        if (args.length > 0) {
-//            URL url = new URL(args[0]);
-//            try (InputStream inputStream = url.openStream()) {
-//                Scanner s = new Scanner(inputStream);
-//                while (s.hasNext()) {
-//                    System.out.println(s.next());
-//                }
-//            }
-//        } else {
-//            System.out.println("empty input.");
-//        }
-//        LOG.info("test");
+        UrlController urlController = new UrlController();
 
-//        InetSocketAddress address = new InetSocketAddress("42.247.27.226", 8081);
-        InetSocketAddress address = new InetSocketAddress("1234562347", 8081);
-        boolean unresolved = address.isUnresolved();
+        Set<String> urlSet = urlController.getUrlSet();
 
-        final Socket socket = new Socket();
-        try {
-            socket.connect(address);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }// 连接远程主机
-//        Thread reader = new Thread() {
-//            @Override
-//            public void run() {
-//                try {
-//                    byte[] buffer = new byte[512];
-//                    InputStream stream = socket.getInputStream();
-//                    socket.getInputStream().read(buffer);
-//                } catch (Exception ex) {
-//
-//                }
-//            }
-//        };
-//        reader.start();
-//
-//        try (InputStream stream = socket.getInputStream())
-//        {
-//            Scanner s = new Scanner(stream);
-//            while (s.hasNext())
-//            {
-//                System.out.println(s.next());
-//            }
-//        }
-
-        System.out.println(address);
-
-
-
-        System.out.println(unresolved);
-
+        for (String url : urlSet) {
+            String result = UrlDetectUtil.callUrl(url);
+            LOG.info(result);
+        }
     }
 }

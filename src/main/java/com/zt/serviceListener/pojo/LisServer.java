@@ -6,6 +6,7 @@ public class LisServer {
     private int port = 0;
     private String userName = "";
     private String password = "";
+    private boolean isEnable = true;
 
     public String getDescription() {
         return description;
@@ -45,6 +46,14 @@ public class LisServer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     @Override

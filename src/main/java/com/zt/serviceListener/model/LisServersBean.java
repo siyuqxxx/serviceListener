@@ -4,6 +4,7 @@ import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.pojo.LisServers;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,9 +30,9 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
     }
 
     @Override
-    public LisServersBean addAll(LisServers set) {
-        if (set != null) {
-            servers.addAll(set.getLisServers().stream()
+    public LisServersBean addAll(LisServers e) {
+        if (Objects.nonNull(e)) {
+            servers.addAll(e.getLisServers().stream()
                     .map(LisServerBean::new).collect(Collectors.toSet()));
         }
         return this;

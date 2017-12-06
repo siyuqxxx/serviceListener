@@ -3,7 +3,7 @@ package com.zt.serviceListener.model;
 import com.zt.serviceListener.pojo.LisServer;
 
 import java.net.InetSocketAddress;
-import java.util.Optional;
+import java.util.Objects;
 
 public class LisServerBean implements IBean<LisServer, LisServerBean> {
 
@@ -31,7 +31,9 @@ public class LisServerBean implements IBean<LisServer, LisServerBean> {
 
     @Override
     public LisServerBean addAll(LisServer e) {
-        this.lisServer = Optional.ofNullable(e).orElse(new LisServer());
+        if (Objects.nonNull(e)) {
+            this.lisServer = e;
+        }
         return this;
     }
 

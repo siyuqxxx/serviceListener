@@ -40,7 +40,7 @@ public class LisServersDaoTest {
         set.setLisServers(lisServers);
 
         LisServersBean bean = new LisServersBean().addAll(set);
-        String path = System.getProperty("user.dir") + "\\src\\resource_test\\lis_server.json";
+        String path = System.getProperty("user.dir") + "\\src\\resource_test\\lis_servers.json";
         LisServersDao dao = new LisServersDao();
 
         // test

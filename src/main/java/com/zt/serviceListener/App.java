@@ -16,6 +16,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         PropertyConfigurator.configure(Constants.PropertiesFile.LOG4J);
 
+        LOG.info("==================== start ====================");
         UrlController urlController = new UrlController();
 
         Set<String> urlSet = urlController.getUrlSet();
@@ -24,5 +25,7 @@ public class App {
             String result = UrlDetectUtil.callUrl(url);
             LOG.info(result);
         }
+
+        LOG.info("==================== end ====================");
     }
 }

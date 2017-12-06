@@ -108,6 +108,7 @@
                   <directory>${basedir}/src/resource</directory>
                   <includes>
                     <include>**/*.properties</include>
+                    <include>**/*.json</include>
                   </includes>
                 </resource>
               </resources>

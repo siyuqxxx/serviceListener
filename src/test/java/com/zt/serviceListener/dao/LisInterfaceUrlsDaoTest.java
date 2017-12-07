@@ -1,6 +1,6 @@
 package com.zt.serviceListener.dao;
 
-import com.zt.serviceListener.model.LisInterfaceUrlsBean;
+import com.zt.serviceListener.bean.LisInterfaceUrlsBean;
 import com.zt.serviceListener.pojo.LisInterfaceUrl;
 import com.zt.serviceListener.pojo.LisInterfaceUrls;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.zt.serviceListener.model;
+package com.zt.serviceListener.bean;
 
 import com.zt.serviceListener.pojo.LisInterfaceUrl;
 import com.zt.serviceListener.util.StrUtil;

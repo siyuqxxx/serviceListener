@@ -1,8 +1,8 @@
 package com.zt.serviceListener;
 
+import com.zt.serviceListener.bean.LisInterfaceUrlsBeanTest;
 import com.zt.serviceListener.dao.LisInterfaceUrlsDaoTest;
 import com.zt.serviceListener.dao.LisServersDaoTest;
-import com.zt.serviceListener.model.LisInterfaceUrlsBeanTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

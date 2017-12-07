@@ -1,4 +1,4 @@
-package com.zt.serviceListener.model;
+package com.zt.serviceListener.bean;
 
 /**
  * @param <T> element

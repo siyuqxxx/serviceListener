@@ -1,6 +1,6 @@
 package com.zt.serviceListener.dao;
 
-import com.zt.serviceListener.model.LisServersBean;
+import com.zt.serviceListener.bean.LisServersBean;
 import com.zt.serviceListener.pojo.LisServer;
 import com.zt.serviceListener.pojo.LisServers;
 import org.junit.Test;

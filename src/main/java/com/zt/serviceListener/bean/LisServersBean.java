@@ -1,4 +1,4 @@
-package com.zt.serviceListener.model;
+package com.zt.serviceListener.bean;
 
 import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.pojo.LisServers;

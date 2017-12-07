@@ -1,9 +1,9 @@
 package com.zt.serviceListener.controller;
 
+import com.zt.serviceListener.bean.LisInterfaceUrlsBean;
 import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.dao.LisInterfaceUrlsDao;
 import com.zt.serviceListener.dao.LisServersDao;
-import com.zt.serviceListener.model.LisInterfaceUrlsBean;
 
 import java.util.HashSet;
 import java.util.Set;

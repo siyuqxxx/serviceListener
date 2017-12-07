@@ -12,7 +12,7 @@ public class LisServersDao implements IDao<LisServersBean>{
         // TODO 只在 init 数据的时候做校验，
         // 校验完毕以后生成一个sha1，read 的时候只做sha1校验，如果一致则不做 init
         // 用于改善性能
-        return new LisServersBean().addAll(set).getResolved();
+        return new LisServersBean().addAll(set).getResolved().getEnable();
     }
 
     @Override

@@ -31,10 +31,16 @@ public class LisServersDaoTest {
         e2.setPort(8081);
         e2.setDescription("重庆第二师范学院");
 
+        LisServer e3 = new LisServer();
+        e3.setIp("123.0.0.2");
+        e3.setPort(8081);
+        e3.setEnable(false);
+
         Set<LisServer> lisServers = new HashSet<>();
         lisServers.add(e);
         lisServers.add(e1);
         lisServers.add(e2);
+        lisServers.add(e3);
 
         LisServers set = new LisServers();
         set.setLisServers(lisServers);
@@ -50,7 +56,7 @@ public class LisServersDaoTest {
 
         System.out.println(read);
 
-        assertEquals(bean.toPojo().getLisServers().size() - 1, read.toPojo().getLisServers().size());
+        assertEquals(bean.toPojo().getLisServers().size() - 2, read.toPojo().getLisServers().size());
 
         for (LisServer s : read.toPojo().getLisServers()) {
             assertTrue(bean.toPojo().getLisServers().contains(s));

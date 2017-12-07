@@ -86,6 +86,7 @@ public class LisServer {
                 ", port=" + port +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", isEnable=" + isEnable +
                 '}';
     }
 }

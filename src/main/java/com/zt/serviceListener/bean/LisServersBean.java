@@ -24,6 +24,12 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
         return bean;
     }
 
+    public LisServersBean getEnable() {
+        LisServersBean bean = new LisServersBean();
+        bean.addAll(servers.stream().filter(LisServerBean::isEnable).collect(Collectors.toSet()));
+        return bean;
+    }
+
     public Set<String> toHttpUrlSet() {
         return servers.stream().map(s -> Constants.HTTP_HEAD + s.getSocketAddress().toString())
                 .collect(Collectors.toSet());

@@ -5,7 +5,7 @@ import com.zt.serviceListener.pojo.LisServer;
 import java.net.InetSocketAddress;
 import java.util.Objects;
 
-public class LisServerBean implements IBean<LisServer, LisServerBean> {
+public class LisServerBean implements IBean<LisServer, LisServerBean>, IEnable{
 
     private LisServer lisServer = new LisServer();
 
@@ -45,6 +45,11 @@ public class LisServerBean implements IBean<LisServer, LisServerBean> {
     @Override
     public void clean() {
         lisServer = new LisServer();
+    }
+
+    @Override
+    public boolean isEnable() {
+        return lisServer.isEnable();
     }
 
     @Override

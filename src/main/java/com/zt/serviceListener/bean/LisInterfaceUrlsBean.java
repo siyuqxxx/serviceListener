@@ -32,7 +32,7 @@ public class LisInterfaceUrlsBean implements IBean<LisInterfaceUrls, LisInterfac
     @Override
     public LisInterfaceUrlsBean addAll(LisInterfaceUrls urls) {
         if (Objects.nonNull(urls)) {
-            Set<LisInterfaceUrl> urlsSet = urls.getUrls();
+            Set<LisInterfaceUrl> urlsSet = urls.getUrlSet();
             if (Objects.nonNull(urlsSet)) {
                 urlBeans.addAll(urlsSet.stream().map(LisInterfaceUrlBean::new).collect(Collectors.toSet()));
             }
@@ -43,7 +43,7 @@ public class LisInterfaceUrlsBean implements IBean<LisInterfaceUrls, LisInterfac
     @Override
     public LisInterfaceUrls toPojo() {
         LisInterfaceUrls urls = new LisInterfaceUrls();
-        urls.setUrls(urlBeans.stream().map(LisInterfaceUrlBean::toPojo).collect(Collectors.toSet()));
+        urls.setUrlSet(urlBeans.stream().map(LisInterfaceUrlBean::toPojo).collect(Collectors.toSet()));
         return urls;
     }
 

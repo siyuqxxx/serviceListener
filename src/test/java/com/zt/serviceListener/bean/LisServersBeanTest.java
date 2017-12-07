@@ -36,12 +36,12 @@ public class LisServersBeanTest {
         s.add(e4);
 
         LisServers servers = new LisServers();
-        servers.setLisServers(s);
+        servers.setServerSet(s);
 
         LisServersBean bean = new LisServersBean();
         bean.addAll(servers);
 
-        Set<LisServer> lisServers = bean.getEnable().toPojo().getLisServers();
+        Set<LisServer> lisServers = bean.reomveDisable().toPojo().getServerSet();
 
         Set<LisServer> exceptSet = new HashSet<>();
         exceptSet.add(e1);

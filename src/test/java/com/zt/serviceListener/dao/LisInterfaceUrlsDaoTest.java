@@ -27,7 +27,7 @@ public class LisInterfaceUrlsDaoTest {
         interfaces.add(urlB);
 
         LisInterfaceUrls lisInterfaceUrls = new LisInterfaceUrls();
-        lisInterfaceUrls.setUrls(interfaces);
+        lisInterfaceUrls.setUrlSet(interfaces);
 
         // test
         LisInterfaceUrlsBean urls = new LisInterfaceUrlsBean().addAll(lisInterfaceUrls);
@@ -40,6 +40,6 @@ public class LisInterfaceUrlsDaoTest {
 
         System.out.println(read);
 
-        assertEquals(urls.toPojo().getUrls(), read.toPojo().getUrls());
+        assertEquals(urls.toPojo().getUrlSet(), read.toPojo().getUrlSet());
     }
 }

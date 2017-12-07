@@ -4,20 +4,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LisInterfaceUrls {
-    private Set<LisInterfaceUrl> urls = new HashSet<LisInterfaceUrl>();
+    private Set<LisInterfaceUrl> urlSet = new HashSet<LisInterfaceUrl>();
 
-    public Set<LisInterfaceUrl> getUrls() {
-        return urls;
+    public Set<LisInterfaceUrl> getUrlSet() {
+        return urlSet;
     }
 
-    public void setUrls(Set<LisInterfaceUrl> urls) {
-        this.urls = urls;
+    public void setUrlSet(Set<LisInterfaceUrl> urlSet) {
+        this.urlSet = urlSet;
     }
 
     @Override
     public String toString() {
         return "LisInterfaceUrls{" +
-                "urls=" + urls +
+                "urlSet=" + urlSet +
                 '}';
     }
 }

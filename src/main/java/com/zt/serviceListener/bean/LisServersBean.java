@@ -1,6 +1,7 @@
 package com.zt.serviceListener.bean;
 
 import com.zt.serviceListener.constants.Constants;
+import com.zt.serviceListener.pojo.LisServer;
 import com.zt.serviceListener.pojo.LisServers;
 
 import java.util.HashSet;
@@ -10,36 +11,42 @@ import java.util.stream.Collectors;
 
 public class LisServersBean implements IBean<LisServers, LisServersBean> {
 
-    private Set<LisServerBean> servers = new HashSet<>();
+    private Set<LisServerBean> serverBeans = new HashSet<>();
 
-    public LisServersBean getResolved() {
+    public LisServersBean removeUnresolved() {
         LisServersBean bean = new LisServersBean();
-        bean.addAll(servers.stream().filter(s -> !s.isUnresolved()).collect(Collectors.toSet()));
+        bean.setServerBeans(serverBeans.stream().filter(s -> !s.isUnresolved()).collect(Collectors.toSet()));
         return bean;
     }
 
-    public LisServersBean getUnresolved() {
+    public LisServersBean removeResolved() {
         LisServersBean bean = new LisServersBean();
-        bean.addAll(servers.stream().filter(LisServerBean::isUnresolved).collect(Collectors.toSet()));
+        bean.setServerBeans(serverBeans.stream().filter(LisServerBean::isUnresolved).collect(Collectors.toSet()));
         return bean;
     }
 
-    public LisServersBean getEnable() {
+    public LisServersBean reomveDisable() {
         LisServersBean bean = new LisServersBean();
-        bean.addAll(servers.stream().filter(LisServerBean::isEnable).collect(Collectors.toSet()));
+        bean.setServerBeans(serverBeans.stream().filter(LisServerBean::isEnable).collect(Collectors.toSet()));
         return bean;
+    }
+
+    public void setServerBeans(Set<LisServerBean> serverBeans) {
+        this.serverBeans.addAll(serverBeans);
     }
 
     public Set<String> toHttpUrlSet() {
-        return servers.stream().map(s -> Constants.HTTP_HEAD + s.getSocketAddress().toString())
+        return serverBeans.stream().map(s -> Constants.HTTP_HEAD + s.getSocketAddress().toString())
                 .collect(Collectors.toSet());
     }
 
     @Override
     public LisServersBean addAll(LisServers e) {
         if (Objects.nonNull(e)) {
-            servers.addAll(e.getLisServers().stream()
-                    .map(LisServerBean::new).collect(Collectors.toSet()));
+            Set<LisServer> lisServers = e.getServerSet();
+            if (Objects.nonNull(lisServers)) {
+                serverBeans.addAll(lisServers.stream().map(LisServerBean::new).collect(Collectors.toSet()));
+            }
         }
         return this;
     }
@@ -47,23 +54,19 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
     @Override
     public LisServers toPojo() {
         LisServers lisServers = new LisServers();
-        lisServers.setLisServers(servers.stream().map(LisServerBean::toPojo).collect(Collectors.toSet()));
+        lisServers.setServerSet(serverBeans.stream().map(LisServerBean::toPojo).collect(Collectors.toSet()));
         return lisServers;
     }
 
     @Override
     public void clean() {
-        servers.clear();
+        serverBeans.clear();
     }
 
     @Override
     public String toString() {
         return "LisServersBean{" +
-                "servers=" + servers +
+                "serverBeans=" + serverBeans +
                 '}';
-    }
-
-    private void addAll(Set<LisServerBean> servers) {
-        this.servers.addAll(servers);
     }
 }

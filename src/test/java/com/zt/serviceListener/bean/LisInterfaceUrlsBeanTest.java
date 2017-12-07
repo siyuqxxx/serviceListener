@@ -32,7 +32,7 @@ public class LisInterfaceUrlsBeanTest {
         arr.add(u3);
 
         LisInterfaceUrls urls = new LisInterfaceUrls();
-        urls.setUrls(arr);
+        urls.setUrlSet(arr);
 
         LisInterfaceUrlsBean bean = new LisInterfaceUrlsBean().addAll(urls);
 

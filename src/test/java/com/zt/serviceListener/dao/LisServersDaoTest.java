@@ -43,7 +43,7 @@ public class LisServersDaoTest {
         lisServers.add(e3);
 
         LisServers set = new LisServers();
-        set.setLisServers(lisServers);
+        set.setServerSet(lisServers);
 
         LisServersBean bean = new LisServersBean().addAll(set);
         String path = System.getProperty("user.dir") + "\\src\\resource_test\\lis_servers.json";
@@ -56,10 +56,10 @@ public class LisServersDaoTest {
 
         System.out.println(read);
 
-        assertEquals(bean.toPojo().getLisServers().size() - 2, read.toPojo().getLisServers().size());
+        assertEquals(bean.toPojo().getServerSet().size() - 2, read.toPojo().getServerSet().size());
 
-        for (LisServer s : read.toPojo().getLisServers()) {
-            assertTrue(bean.toPojo().getLisServers().contains(s));
+        for (LisServer s : read.toPojo().getServerSet()) {
+            assertTrue(bean.toPojo().getServerSet().contains(s));
         }
 
         System.out.println(read.toHttpUrlSet());

@@ -4,7 +4,7 @@ import com.zt.serviceListener.pojo.LisInterfaceUrl;
 import com.zt.serviceListener.pojo.LisInterfaceUrls;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,17 +26,17 @@ public class LisInterfaceUrlsBeanTest {
         u3.setLisInterfaceUrl("/test/urt/bookinfo/title/think");
 
 
-        LisInterfaceUrl[] arr = new LisInterfaceUrl[3];
-        arr[0] = u1;
-        arr[1] = u2;
-        arr[2] = u3;
+        Set<LisInterfaceUrl> arr = new HashSet<>();
+        arr.add(u1);
+        arr.add(u2);
+        arr.add(u3);
 
         LisInterfaceUrls urls = new LisInterfaceUrls();
         urls.setUrls(arr);
 
         LisInterfaceUrlsBean bean = new LisInterfaceUrlsBean().addAll(urls);
 
-        Set<String> set = Arrays.stream(arr).map(LisInterfaceUrl::getLisInterfaceUrl).collect(Collectors.toSet());
+        Set<String> set = arr.stream().map(LisInterfaceUrl::getLisInterfaceUrl).collect(Collectors.toSet());
 
         for (int i = 0; i < 50; i++) {
             String url = bean.getRandomUrlInterface().toUrl();

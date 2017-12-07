@@ -5,7 +5,10 @@ import com.zt.serviceListener.pojo.LisInterfaceUrl;
 import com.zt.serviceListener.pojo.LisInterfaceUrls;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 public class LisInterfaceUrlsDaoTest {
     @Test
@@ -19,12 +22,12 @@ public class LisInterfaceUrlsDaoTest {
         urlB.setDescription("get new books");
         urlB.setLisInterfaceUrl("/datasnap/rest/TInterFace/newbooks/1");
 
-        LisInterfaceUrl[] urlRouting = new LisInterfaceUrl[2];
-        urlRouting[0] = urlA;
-        urlRouting[1] = urlB;
+        Set<LisInterfaceUrl> interfaces = new HashSet<>();
+        interfaces.add(urlA);
+        interfaces.add(urlB);
 
         LisInterfaceUrls lisInterfaceUrls = new LisInterfaceUrls();
-        lisInterfaceUrls.setUrls(urlRouting);
+        lisInterfaceUrls.setUrls(interfaces);
 
         // test
         LisInterfaceUrlsBean urls = new LisInterfaceUrlsBean().addAll(lisInterfaceUrls);
@@ -37,11 +40,6 @@ public class LisInterfaceUrlsDaoTest {
 
         System.out.println(read);
 
-        assertArrayEquals(urls.toPojo().getUrls(), read.toPojo().getUrls());
+        assertEquals(urls.toPojo().getUrls(), read.toPojo().getUrls());
     }
-
-//    @Test
-//    public void temp() throws Exception {
-//        Set<String>
-//    }
 }

@@ -8,17 +8,28 @@ import java.util.Objects;
 public class LisInterfaceUrlBean implements IBean<LisInterfaceUrl, LisInterfaceUrlBean> {
     private LisInterfaceUrl lisInterfaceUrl = new LisInterfaceUrl();
 
+    public LisInterfaceUrlBean(){}
+
+    public LisInterfaceUrlBean(LisInterfaceUrl e) {
+        addAll(e);
+    }
+
+    public boolean isEnable()
+    {
+        return lisInterfaceUrl.isEnable();
+    }
+
+    public String toUrl() {
+        String url = StrUtil.toValid(lisInterfaceUrl.getLisInterfaceUrl());
+        return url.startsWith("/") ? url : "/" + url;
+    }
+
     @Override
     public LisInterfaceUrlBean addAll(LisInterfaceUrl e) {
         if (Objects.nonNull(e)) {
             this.lisInterfaceUrl = e;
         }
         return this;
-    }
-
-    public String toUrl() {
-        String url = StrUtil.toValid(lisInterfaceUrl.getLisInterfaceUrl());
-        return url.startsWith("/") ? url : "/" + url;
     }
 
     @Override

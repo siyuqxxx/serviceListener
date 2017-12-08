@@ -4,7 +4,9 @@ import java.io.File;
 
 public final class Constants {
     public static final String BASE_DIR = System.getProperty("user.dir") + File.separator;
-    public static final String CONF_DIR = BASE_DIR + "config" + File.separator;
+    public static final String DEBUG_DIR = BASE_DIR + "src" + File.separator + "main" + File.separator;
+    public static final boolean IS_DEBUG = new File(DEBUG_DIR).exists();
+    public static final String CONF_DIR = (IS_DEBUG ? DEBUG_DIR : BASE_DIR) + "config" + File.separator;
 
     public static final String HTTP_HEAD = "http:/";
 

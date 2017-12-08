@@ -7,9 +7,8 @@ import java.io.*;
 public class JSONUtil {
 
     public static void obj2JsonFile(String path, Object obj) {
-        if (StrUtil.invalidStr(path))
-        {
-            return ;
+        if (StrUtil.invalidStr(path)) {
+            return;
         }
 
 
@@ -41,8 +40,7 @@ public class JSONUtil {
     }
 
     public static <T> T jsonFile2Obj(String path, Class<T> clazz) {
-        if (StrUtil.invalidStr(path))
-        {
+        if (StrUtil.invalidStr(path)) {
             return null;
         }
 

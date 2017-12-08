@@ -16,8 +16,8 @@ import java.util.Set;
 public class TestUtil {
     public static class JsonFile
     {
-        public static String LIS_SERVERS = Constants.BASE_DIR + "\\src\\resource_test\\lis_servers.json";
-        public static String LIS_INTERFACE_URL = Constants.BASE_DIR + "\\src\\resource_test\\lis_interface_urls.json";
+        public static String LIS_SERVERS = Constants.BASE_DIR + "src\\test\\config\\lis_servers.json";
+        public static String LIS_INTERFACE_URL = Constants.BASE_DIR + "src\\test\\config\\lis_interface_urls.json";
     }
 
 

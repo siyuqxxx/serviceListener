@@ -38,16 +38,6 @@
     </dependency>
   </dependencies>
   <build>
-    <resources>
-      <resource>
-        <directory>src/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -96,19 +86,37 @@
         <version>2.7</version>
         <executions>
           <execution>
-            <id>copy-xmls</id>
+            <id>copy-config</id>
             <phase>process-sources</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/target/conf</outputDirectory>
+              <outputDirectory>${basedir}/target/config</outputDirectory>
               <resources>
                 <resource>
-                  <directory>${basedir}/src/resource</directory>
+                  <directory>${basedir}/src/main/config</directory>
                   <includes>
                     <include>**/*.properties</include>
                     <include>**/*.json</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-bin</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/bin</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/bin</directory>
+                  <includes>
+                    <include>**/*.bat</include>
                   </includes>
                 </resource>
               </resources>

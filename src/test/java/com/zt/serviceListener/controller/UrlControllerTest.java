@@ -13,9 +13,9 @@ public class UrlControllerTest {
     @Test
     public void testGetUrlSet()
     {
-        LisInterfaceUrlsBean IfUrlsBean = new LisInterfaceUrlsDao().read(Constants.BASE_DIR + "src\\resource\\LisInterfaceUrls.json");
+        LisInterfaceUrlsBean IfUrlsBean = new LisInterfaceUrlsDao().read(Constants.BASE_DIR + "src\\test\\config\\lis_interface_urls.json");
 
-        Set<String> serverUrls = new LisServersDao().read(Constants.BASE_DIR + "src\\resource_test\\lis_servers.json").toHttpUrlSet();
+        Set<String> serverUrls = new LisServersDao().read(Constants.BASE_DIR + "src\\test\\config\\lis_servers.json").toHttpUrlSet();
 
         Set<String> resultUrls = new HashSet<>();
         for (String url : serverUrls) {

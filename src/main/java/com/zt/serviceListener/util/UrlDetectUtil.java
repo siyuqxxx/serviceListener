@@ -52,7 +52,7 @@ public class UrlDetectUtil {
                 if (b.length() < Constants.MAX_URL_RESPONSE_LENGTH) {
                     b.append(s.next());
                 } else {
-                    LOG.warn("url response is over max length. response msg:\n" + b.toString());
+                    LOG.warn("url response is over max length. response msg: " + b.toString());
                     break;
                 }
             }

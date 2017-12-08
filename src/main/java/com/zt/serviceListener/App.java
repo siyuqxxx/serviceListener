@@ -1,14 +1,14 @@
 package com.zt.serviceListener;
 
 import com.zt.serviceListener.constants.Constants;
-import com.zt.serviceListener.controller.UrlController;
-import com.zt.serviceListener.util.UrlDetectUtil;
+import com.zt.serviceListener.schedule.ConnectUrlJob;
 import org.apache.log4j.PropertyConfigurator;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.Set;
 
 public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
@@ -16,16 +16,30 @@ public class App {
     public static void main(String[] args) throws IOException {
         PropertyConfigurator.configure(Constants.PropertiesFile.LOG4J);
 
-        LOG.info("==================== start ====================");
-        UrlController urlController = new UrlController();
+        SchedulerFactory schedulerfactory = new StdSchedulerFactory();
+        Scheduler scheduler = null;
+        try {
+            scheduler = schedulerfactory.getScheduler();
 
-        Set<String> urlSet = urlController.getUrlSet();
+            JobDetail job = JobBuilder.newJob(ConnectUrlJob.class).withIdentity("job1", "jgroup1")
+                    .storeDurably().build();
 
-        for (String url : urlSet) {
-            String result = UrlDetectUtil.callUrl(url);
-            LOG.info(result);
+
+            Trigger workDayTrigger = TriggerBuilder.newTrigger().withIdentity("workday", "triggerGroup")
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0/30 8-22 ? * MON-FRI"))
+                    .startNow().forJob(job).build();
+
+            Trigger weekendTrigger = TriggerBuilder.newTrigger().withIdentity("weekend", "triggerGroup")
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 * 8-22 ? * SAT-SUN"))
+                    .startNow().forJob(job).build();
+
+            scheduler.addJob(job, true);
+            scheduler.scheduleJob(workDayTrigger);
+            scheduler.scheduleJob(weekendTrigger);
+
+            scheduler.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        LOG.info("==================== end ====================");
     }
 }

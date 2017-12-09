@@ -2,32 +2,31 @@ package com.zt.serviceListener;
 
 import com.zt.serviceListener.bean.LisInterfaceUrlsBean;
 import com.zt.serviceListener.bean.LisServersBean;
+import com.zt.serviceListener.bean.MailTemplatesBean;
 import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.dao.LisInterfaceUrlsDao;
 import com.zt.serviceListener.dao.LisServersDao;
-import com.zt.serviceListener.pojo.LisInterfaceUrl;
-import com.zt.serviceListener.pojo.LisInterfaceUrls;
-import com.zt.serviceListener.pojo.LisServer;
-import com.zt.serviceListener.pojo.LisServers;
+import com.zt.serviceListener.dao.MailTemplatesDao;
+import com.zt.serviceListener.pojo.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class TestUtil {
-    public static class JsonFile
-    {
+    public static class JsonFile {
         public static String LIS_SERVERS = Constants.BASE_DIR + "src\\test\\config\\lis_servers.json";
         public static String LIS_INTERFACE_URL = Constants.BASE_DIR + "src\\test\\config\\lis_interface_urls.json";
+        public static String Mail_Template = Constants.BASE_DIR + "src\\test\\config\\mail_template.json";
     }
 
-
-    public static LisServersDao createLisServersDao() {
-        return new LisServersDao();
-    }
 
     public static class CreateLisServer {
+        public static LisServersDao dao() {
+            return new LisServersDao();
+        }
+
         public static void jsonFile() {
-            createLisServersDao().write(JsonFile.LIS_SERVERS, serversBean());
+            dao().write(JsonFile.LIS_SERVERS, serversBean());
         }
 
         public static LisServersBean serversBean() {
@@ -102,15 +101,12 @@ public class TestUtil {
         }
     }
 
-    public static class CreateLisInterfaceUrl
-    {
-        public static LisInterfaceUrlsDao dao()
-        {
+    public static class CreateLisInterfaceUrl {
+        public static LisInterfaceUrlsDao dao() {
             return new LisInterfaceUrlsDao();
         }
 
-        public static void jsonFile()
-        {
+        public static void jsonFile() {
             dao().write(JsonFile.LIS_INTERFACE_URL, urlsbean());
         }
 
@@ -125,8 +121,7 @@ public class TestUtil {
             return lisInterfaceUrls;
         }
 
-        public static Set<LisInterfaceUrl> urlSet()
-        {
+        public static Set<LisInterfaceUrl> urlSet() {
             Set<LisInterfaceUrl> set = new HashSet<>();
             set.add(CreateLisInterfaceUrl.normal_1());
             set.add(CreateLisInterfaceUrl.normal_2());
@@ -135,8 +130,7 @@ public class TestUtil {
             return set;
         }
 
-        public static LisInterfaceUrl normal_1()
-        {
+        public static LisInterfaceUrl normal_1() {
             LisInterfaceUrl u = new LisInterfaceUrl();
             u.setDescription("normal 1");
             u.setLisInterfaceUrl("/test/urt/bookinfo/title/java");
@@ -144,8 +138,7 @@ public class TestUtil {
             return u;
         }
 
-        public static LisInterfaceUrl normal_2()
-        {
+        public static LisInterfaceUrl normal_2() {
             LisInterfaceUrl u = new LisInterfaceUrl();
             u.setDescription("normal 2");
             u.setLisInterfaceUrl("/test/urt/bookinfo/title/java");
@@ -153,8 +146,7 @@ public class TestUtil {
             return u;
         }
 
-        public static LisInterfaceUrl disable()
-        {
+        public static LisInterfaceUrl disable() {
             LisInterfaceUrl u = new LisInterfaceUrl();
             u.setDescription("disable");
             u.setLisInterfaceUrl("/test/urt/bookinfo/title/java");
@@ -164,5 +156,52 @@ public class TestUtil {
         }
     }
 
+    public static class CreateMailTemplate {
+        public static MailTemplatesDao dao() {
+            return new MailTemplatesDao();
+        }
 
+        public static void jsonFile() {
+            dao().write(JsonFile.Mail_Template, mailTemplatesBean());
+        }
+
+        public static MailTemplatesBean mailTemplatesBean() {
+            MailTemplates set = new MailTemplates();
+            set.setMailSet(mailSet());
+
+            return new MailTemplatesBean().addAll(set);
+        }
+
+        public static Set<MailTemplate> mailSet() {
+            Set<MailTemplate> mailSet = new HashSet<>();
+            mailSet.add(mail_enable());
+            mailSet.add(mail_disable());
+
+            return mailSet;
+        }
+
+        public static MailTemplate mail_disable() {
+            MailTemplate mail = new MailTemplate();
+            mail.setId(1);
+            mail.setFrom("qian siyu<siyuq@qq.com>");
+            mail.setReplyTo("qian siyu<siyuq@qq.com>, qian siyu<qiansy@beijingtu.com>");
+            mail.setSubject("test mail disable");
+            mail.setContentType(Constants.Mail.TEXT_PLAIN_UTF8);
+            mail.setContent("is mail will not be got");
+            mail.setEnable(false);
+            return mail;
+        }
+
+        public static MailTemplate mail_enable() {
+            MailTemplate mail = new MailTemplate();
+            mail.setId(2);
+            mail.setFrom("qian siyu<siyuq@qq.com>");
+            mail.setReplyTo("qian siyu<siyuq@qq.com>, qian siyu<qiansy@beijingtu.com>");
+            mail.setSubject("test mail enable");
+            mail.setContentType(Constants.Mail.TEXT_PLAIN_UTF8);
+            mail.setContent("hello world! this is a mail test.");
+            mail.setEnable(true);
+            return mail;
+        }
+    }
 }

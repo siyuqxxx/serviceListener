@@ -1,5 +1,6 @@
 package com.zt.serviceListener.schedule;
 
+import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.controller.UrlController;
 import com.zt.serviceListener.util.UrlDetectUtil;
 import org.quartz.DisallowConcurrentExecution;
@@ -9,6 +10,9 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @DisallowConcurrentExecution
@@ -17,16 +21,24 @@ public class ConnectUrlJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        LOG.info("==================== start ====================");
-        UrlController urlController = new UrlController();
+        LOG.error("==================== start ====================");
 
-        Set<String> urlSet = urlController.getUrlSet();
+        Map<String, Constants.ConnectStatus> result = new HashMap<>();
 
+        Set<String> urlSet = new UrlController().getUrlSet();
         for (String url : urlSet) {
-            String result = UrlDetectUtil.callUrl(url);
-            LOG.info(result);
+            try {
+                String response = UrlDetectUtil.callUrl(url);
+                result.put(url, Constants.ConnectStatus.SUCCESS);
+                LOG.info(response);
+            } catch (IOException e) {
+                result.put(url, Constants.ConnectStatus.ERROR);
+                LOG.error("service connect error. url: " + url, e);
+            }
         }
 
-        LOG.info("==================== end ====================");
+        context.setResult(result);
+
+        LOG.error("==================== end ====================");
     }
 }

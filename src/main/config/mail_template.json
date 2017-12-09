@@ -1,0 +1,24 @@
+{
+  "mailSet": [
+    {
+      "carbonCopy": "",
+      "content": "is mail will not be got",
+      "contentType": "text/plain;charset=utf-8",
+      "enable": true,
+      "from": "qian siyu<siyuqxxx@qq.com>",
+      "id": 1,
+      "replyTo": "qian siyu<siyuqxxx@qq.com>, qian siyu<qiansy@beijingzhangtu.com>",
+      "subject": "test mail disable"
+    },
+    {
+      "carbonCopy": "",
+      "content": "hello world! this is a mail test.",
+      "contentType": "text/plain;charset=utf-8",
+      "enable": false,
+      "from": "qian siyu<siyuq@qq.com>",
+      "id": 2,
+      "replyTo": "qian siyu<siyuq@qq.com>, qian siyu<qiansy@beijingtu.com>",
+      "subject": "test mail enable"
+    }
+  ]
+}

@@ -8,3 +8,6 @@ target/
 # 忽略 maven 自动生成的配置文件
 release.properties
 dependency-reduced-pom.xml
+
+# 忽略 日志
+logs/

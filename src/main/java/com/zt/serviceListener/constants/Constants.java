@@ -14,10 +14,22 @@ public final class Constants {
 
     public static class PropertiesFile {
         public static final String LOG4J = CONF_DIR + "log4j.properties";
+        public static final String MAIL = CONF_DIR + "mail.properties";
     }
 
     public static class JsonFile {
         public static final String LIS_SERVER = CONF_DIR + "lis_servers.json";
         public static final String LIS_INTERFACE = CONF_DIR + "lis_interface_urls.json";
+        public static final String MAIL = CONF_DIR + "mail_template.json";
+    }
+
+    public static class Mail {
+        public static final int ERROR_MSG_TEMPLATE = 1;
+        public static final String TEXT_PLAIN_UTF8 = "text/plain;charset=utf-8";
+        public static final String TEXT_HTML_UTF8 = "text/html;charset=utf-8";
+    }
+
+    public enum ConnectStatus {
+        SUCCESS, ERROR
     }
 }

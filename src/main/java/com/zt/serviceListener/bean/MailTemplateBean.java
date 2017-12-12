@@ -2,7 +2,6 @@ package com.zt.serviceListener.bean;
 
 import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.pojo.MailTemplate;
-import com.zt.serviceListener.util.MailUtil;
 import com.zt.serviceListener.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,7 @@ import javax.mail.internet.InternetAddress;
 import java.util.Objects;
 
 public class MailTemplateBean implements IBean<MailTemplate, MailTemplateBean>, IEnable {
-    private static final Logger LOG = LoggerFactory.getLogger(MailUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MailTemplateBean.class);
 
     private MailTemplate mail = new MailTemplate();
 

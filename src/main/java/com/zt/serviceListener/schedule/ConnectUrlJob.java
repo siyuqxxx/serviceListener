@@ -28,6 +28,7 @@ public class ConnectUrlJob implements Job {
         Set<String> urlSet = new UrlController().getUrlSet();
         for (String url : urlSet) {
             try {
+                LOG.info("call url: " + url);
                 String response = UrlDetectUtil.callUrl(url);
                 result.put(url, Constants.ConnectStatus.SUCCESS);
                 LOG.info(response);

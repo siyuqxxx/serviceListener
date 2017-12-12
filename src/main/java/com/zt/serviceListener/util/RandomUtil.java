@@ -1,6 +1,5 @@
 package com.zt.serviceListener.util;
 
-import com.zt.serviceListener.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +12,7 @@ import java.util.Random;
 public class RandomUtil {
     private static SecureRandom sRandom = null;
     private static Random random = new Random();
-    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomUtil.class);
 
     public static int nextInt(int range) {
         if (range < 0) {

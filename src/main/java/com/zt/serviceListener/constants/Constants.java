@@ -21,6 +21,7 @@ public final class Constants {
         public static final String LIS_SERVER = CONF_DIR + "lis_servers.json";
         public static final String LIS_INTERFACE = CONF_DIR + "lis_interface_urls.json";
         public static final String MAIL = CONF_DIR + "mail_template.json";
+        public static final String SCHEDULES = CONF_DIR + "schedules.json";
     }
 
     public static class Mail {

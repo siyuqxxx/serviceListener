@@ -1,13 +1,18 @@
 package com.zt.serviceListener;
 
-import com.zt.serviceListener.bean.LisInterfaceUrlsBean;
-import com.zt.serviceListener.bean.LisServersBean;
-import com.zt.serviceListener.bean.MailTemplatesBean;
+import com.zt.serviceListener.bean.*;
 import com.zt.serviceListener.constants.Constants;
 import com.zt.serviceListener.dao.LisInterfaceUrlsDao;
 import com.zt.serviceListener.dao.LisServersDao;
 import com.zt.serviceListener.dao.MailTemplatesDao;
+import com.zt.serviceListener.dao.SchedulerInfosDao;
 import com.zt.serviceListener.pojo.*;
+import com.zt.serviceListener.pojo.Quartz.JobDescription;
+import com.zt.serviceListener.pojo.Quartz.SchedulerInfo;
+import com.zt.serviceListener.pojo.Quartz.SchedulerInfos;
+import com.zt.serviceListener.pojo.Quartz.TriggerDescription;
+import com.zt.serviceListener.schedule.TestJob_1;
+import com.zt.serviceListener.schedule.TestJob_2;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,9 +21,9 @@ public class TestUtil {
     public static class JsonFile {
         public static String LIS_SERVERS = Constants.BASE_DIR + "src\\test\\config\\lis_servers.json";
         public static String LIS_INTERFACE_URL = Constants.BASE_DIR + "src\\test\\config\\lis_interface_urls.json";
-        public static String Mail_Template = Constants.BASE_DIR + "src\\test\\config\\mail_template.json";
+        public static String MAIL_TEMPLATE = Constants.BASE_DIR + "src\\test\\config\\mail_template.json";
+        public static String SCHEDULES = Constants.BASE_DIR + "src\\test\\config\\schedules.json";
     }
-
 
     public static class CreateLisServer {
         public static LisServersDao dao() {
@@ -176,7 +181,7 @@ public class TestUtil {
         }
 
         public static void jsonFile() {
-            dao().write(JsonFile.Mail_Template, mailTemplatesBean());
+            dao().write(JsonFile.MAIL_TEMPLATE, mailTemplatesBean());
         }
 
         public static MailTemplatesBean mailTemplatesBean() {
@@ -216,6 +221,106 @@ public class TestUtil {
             mail.setContent("hello world! this is a mail test.");
             mail.setEnable(true);
             return mail;
+        }
+    }
+
+    public static class CreateQuartz {
+
+        public static SchedulerInfosDao dao() {
+            return new SchedulerInfosDao();
+        }
+
+        public static void jsonFile() {
+            dao().write(JsonFile.SCHEDULES, schedulerInfosBean());
+        }
+
+        public static JobDescription<TestJob_1> jobDescription_1() {
+            JobDescription<TestJob_1> job = new JobDescription<>();
+            job.setName("test job 1");
+            job.setGroup("test job group 1");
+            job.setJobClazz(TestJob_1.class);
+            return job;
+        }
+
+        public static JobDescription jobDescription_2() {
+            JobDescription<TestJob_2> job = new JobDescription<>();
+            job.setName("test job 2");
+            job.setGroup("test job group 2");
+            job.setJobClazz(TestJob_2.class);
+            return job;
+        }
+
+        public static TriggerDescription triggerDescription_1() {
+            TriggerDescription trigger = new TriggerDescription();
+            trigger.setName("test at every 2 second");
+            trigger.setGroup("test trigger group");
+            trigger.setCron("0/2 * * * * ?");
+            return trigger;
+        }
+
+        public static TriggerDescription triggerDescription_2() {
+            TriggerDescription trigger = new TriggerDescription();
+            trigger.setName("test at every 5 second");
+            trigger.setGroup("test trigger group");
+            trigger.setCron("0/5 * * * * ?");
+            return trigger;
+        }
+
+        public static TriggerDescription triggerDescription_3() {
+            TriggerDescription trigger = new TriggerDescription();
+            trigger.setName("test at every 3 second");
+            trigger.setGroup("test trigger group");
+            trigger.setCron("0/3 * * * * ?");
+            return trigger;
+        }
+
+        public static SchedulerInfo schedulerInfo_enable() {
+            Set<TriggerDescription> triggers = new HashSet<>();
+            triggers.add(triggerDescription_1());
+            triggers.add(triggerDescription_2());
+
+            SchedulerInfo schedulerInfo = new SchedulerInfo();
+            schedulerInfo.setJob(jobDescription_1());
+            schedulerInfo.setTriggers(triggers);
+            schedulerInfo.setEnable(true);
+
+            return schedulerInfo;
+        }
+
+        public static SchedulerInfo schedulerInfo_disable() {
+            Set<TriggerDescription> triggers = new HashSet<>();
+            triggers.add(triggerDescription_3());
+
+            SchedulerInfo schedulerInfo = new SchedulerInfo();
+            schedulerInfo.setJob(jobDescription_2());
+            schedulerInfo.setTriggers(triggers);
+            schedulerInfo.setEnable(false);
+
+            return schedulerInfo;
+        }
+
+        public static SchedulerInfoBean schedulerInfoBean_enable() {
+            return new SchedulerInfoBean().addAll(schedulerInfo_enable());
+        }
+
+        public static SchedulerInfoBean schedulerInfoBean_disable() {
+            return new SchedulerInfoBean().addAll(schedulerInfo_disable());
+        }
+
+        public static SchedulerInfosBean schedulerInfosBean() {
+            Set<SchedulerInfo> infos = schedulerInfoSet();
+
+            SchedulerInfos scheduerInfos = new SchedulerInfos();
+            scheduerInfos.setSchedulerInfoSet(infos);
+
+            return new SchedulerInfosBean().addAll(scheduerInfos);
+        }
+
+        public static Set<SchedulerInfo> schedulerInfoSet() {
+            Set<SchedulerInfo> infos = new HashSet<>();
+            infos.add(schedulerInfo_disable());
+            infos.add(schedulerInfo_enable());
+            return infos;
         }
     }
 }

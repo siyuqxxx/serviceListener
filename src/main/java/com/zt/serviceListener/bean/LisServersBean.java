@@ -31,7 +31,7 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
         return bean;
     }
 
-    public void setServerBeans(Set<LisServerBean> serverBeans) {
+    private void setServerBeans(Set<LisServerBean> serverBeans) {
         this.serverBeans.addAll(serverBeans);
     }
 

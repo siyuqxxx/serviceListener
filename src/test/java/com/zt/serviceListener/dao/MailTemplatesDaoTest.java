@@ -18,7 +18,7 @@ public class MailTemplatesDaoTest {
 
         // test
         MailTemplatesDao dao = new MailTemplatesDao();
-        MailTemplatesBean read = dao.read(TestUtil.JsonFile.Mail_Template);
+        MailTemplatesBean read = dao.read(TestUtil.JsonFile.MAIL_TEMPLATE);
 
         System.out.println(read);
 

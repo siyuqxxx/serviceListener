@@ -1,0 +1,39 @@
+{
+  "schedulerInfoSet": [
+    {
+      "enable": false,
+      "job": {
+        "group": "test job group 1",
+        "jobClazz": "com.zt.serviceListener.schedule.TestJob_1",
+        "name": "test job 1"
+      },
+      "triggers": [
+        {
+          "cron": "0/2 * * * * ?",
+          "group": "test trigger group",
+          "name": "test at every 2 second"
+        },
+        {
+          "cron": "0 1 * * * ?",
+          "group": "test trigger group",
+          "name": "test at every 5 second"
+        }
+      ]
+    },
+    {
+      "enable": true,
+      "job": {
+        "group": "test job group 2",
+        "jobClazz": "com.zt.serviceListener.schedule.ConnectUrlJob",
+        "name": "test job 2"
+      },
+      "triggers": [
+        {
+          "cron": "0 0/1 * * * ?",
+          "group": "test trigger group",
+          "name": "test at every 3 second"
+        }
+      ]
+    }
+  ]
+}

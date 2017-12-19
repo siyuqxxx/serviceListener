@@ -1,16 +1,17 @@
 package com.zt.serviceListener;
 
+import com.zt.serviceListener.bean.SchedulerInfoBean;
+import com.zt.serviceListener.bean.SchedulerInfosBean;
 import com.zt.serviceListener.constants.Constants;
-import com.zt.serviceListener.schedule.ConnectListener;
-import com.zt.serviceListener.schedule.ConnectUrlJob;
+import com.zt.serviceListener.dao.SchedulerInfosDao;
+import com.zt.serviceListener.schedule.QuartzManager;
+import com.zt.serviceListener.util.StrUtil;
 import org.apache.log4j.PropertyConfigurator;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.impl.matchers.KeyMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
@@ -18,32 +19,40 @@ public class App {
     public static void main(String[] args) throws IOException {
         PropertyConfigurator.configure(Constants.PropertiesFile.LOG4J);
 
-        SchedulerFactory schedulerfactory = new StdSchedulerFactory();
-        Scheduler scheduler = null;
-        try {
-            scheduler = schedulerfactory.getScheduler();
+        if (Objects.nonNull(args) && args.length > 0) {
+            String module = StrUtil.toValid(args[0]);
+            String command = StrUtil.toValid(args[1]);
 
-            JobDetail job = JobBuilder.newJob(ConnectUrlJob.class).withIdentity("job1", "jgroup1")
-                    .storeDurably().build();
+            LOG.warn(String.format("module: %s, command: %s.", module, command));
 
-            Trigger workDayTrigger = TriggerBuilder.newTrigger().withIdentity("workday", "triggerGroup")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0/30 8-22 ? * MON-FRI"))
-                    .startNow().forJob(job).build();
+            switch (module) {
+                case "schedule":
+                    executeScheduleCommand(command);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
-            Trigger weekendTrigger = TriggerBuilder.newTrigger().withIdentity("weekend", "triggerGroup")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0 15 8-22 ? * SAT-SUN"))
-                    .startNow().forJob(job).build();
-
-            KeyMatcher<JobKey> keyMatcher = KeyMatcher.keyEquals(job.getKey());
-            scheduler.getListenerManager().addJobListener(new ConnectListener(), keyMatcher);
-
-            scheduler.addJob(job, true);
-            scheduler.scheduleJob(workDayTrigger);
-            scheduler.scheduleJob(weekendTrigger);
-
-            scheduler.start();
-        } catch (SchedulerException e) {
-            LOG.error("Scheduler runtime error.", e);
+    private static void executeScheduleCommand(String command) {
+        switch (command) {
+            case "start":
+                SchedulerInfosDao dao = new SchedulerInfosDao();
+                SchedulerInfosBean read = dao.read(Constants.JsonFile.SCHEDULES);
+                for (SchedulerInfoBean bean : read.getSchedulerInfosBean()) {
+                    LOG.info("SchedulerInfo: " + bean);
+                    QuartzManager.getInstance().addSchedule(bean);
+                }
+                LOG.info("start Service Listener successful!");
+                break;
+            case "shutdown":
+                QuartzManager.getInstance().shutdownJobs();
+                QuartzManager.getInstance().clean();
+                LOG.info("shutdown Service Listener successful!");
+                break;
+            default:
+                break;
         }
     }
 }

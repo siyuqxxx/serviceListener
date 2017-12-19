@@ -18,6 +18,6 @@ public class LisInterfaceUrlsDaoTest {
 
         System.out.println(read);
 
-        assertEquals(TestUtil.CreateLisInterfaceUrl.urlSet(), read.toPojo().getUrlSet());
+        assertEquals(TestUtil.CreateLisInterfaceUrl.urlSet_normal(), read.toPojo().getUrlSet());
     }
 }

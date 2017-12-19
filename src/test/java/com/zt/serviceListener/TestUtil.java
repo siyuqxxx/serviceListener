@@ -123,9 +123,23 @@ public class TestUtil {
 
         public static Set<LisInterfaceUrl> urlSet() {
             Set<LisInterfaceUrl> set = new HashSet<>();
+            set.addAll(urlSet_disable());
+            set.addAll(urlSet_normal());
+
+            return set;
+        }
+
+        public static Set<LisInterfaceUrl> urlSet_disable() {
+            Set<LisInterfaceUrl> set = new HashSet<>();
+            set.add(CreateLisInterfaceUrl.disable());
+
+            return set;
+        }
+
+        public static Set<LisInterfaceUrl> urlSet_normal() {
+            Set<LisInterfaceUrl> set = new HashSet<>();
             set.add(CreateLisInterfaceUrl.normal_1());
             set.add(CreateLisInterfaceUrl.normal_2());
-            set.add(CreateLisInterfaceUrl.disable());
 
             return set;
         }
@@ -141,7 +155,7 @@ public class TestUtil {
         public static LisInterfaceUrl normal_2() {
             LisInterfaceUrl u = new LisInterfaceUrl();
             u.setDescription("normal 2");
-            u.setLisInterfaceUrl("/test/urt/bookinfo/title/java");
+            u.setLisInterfaceUrl("/test/urt/bookinfo/title/python");
 
             return u;
         }
@@ -149,7 +163,7 @@ public class TestUtil {
         public static LisInterfaceUrl disable() {
             LisInterfaceUrl u = new LisInterfaceUrl();
             u.setDescription("disable");
-            u.setLisInterfaceUrl("/test/urt/bookinfo/title/java");
+            u.setLisInterfaceUrl("/test/urt/bookinfo/title/c");
             u.setEnable(false);
 
             return u;

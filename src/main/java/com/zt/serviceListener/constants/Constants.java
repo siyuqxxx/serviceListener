@@ -8,7 +8,7 @@ public final class Constants {
     public static final boolean IS_DEBUG = new File(DEBUG_DIR).exists();
     public static final String CONF_DIR = (IS_DEBUG ? DEBUG_DIR : BASE_DIR) + "config" + File.separator;
 
-    public static final String HTTP_HEAD = "http:/";
+    public static final String HTTP_HEAD = "http://";
 
     public static final int MAX_URL_RESPONSE_LENGTH = 1024;
 

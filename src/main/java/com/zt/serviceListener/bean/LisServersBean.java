@@ -36,7 +36,7 @@ public class LisServersBean implements IBean<LisServers, LisServersBean> {
     }
 
     public Set<String> toHttpUrlSet() {
-        return serverBeans.stream().map(s -> Constants.HTTP_HEAD + s.getSocketAddress().getHostString())
+        return serverBeans.stream().map(s -> Constants.HTTP_HEAD + s.getSocketAddress().getHostString() + ":" + s.getSocketAddress().getPort())
                 .collect(Collectors.toSet());
     }
 

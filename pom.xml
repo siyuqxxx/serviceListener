@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.zt.serviceListener</groupId>
-  <artifactId>serviceListener</artifactId>
+  <artifactId>Service-Listener</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>serviceListener</name>
+  <name>Service-Listener</name>
   <url>http://maven.apache.org</url>
 
   <properties>
